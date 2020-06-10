@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
  class ProductControl extends StatelessWidget{
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
       margin: EdgeInsets.all(5),
       child: RaisedButton(
         onPressed: () {
-          addProduct("Nighties");
+          addProduct({"title":"Confirm your order","imageUrl":"images/nighttime.jpg"});
         },
         color: Colors.green,
         child: Text("Shop Online"),

@@ -3,21 +3,21 @@ import 'package:fluttercoursee/product_control.dart';
 import './products.dart';
 
 class ProductManager extends StatefulWidget {
-    final String startingProduct;
-  ProductManager(this.startingProduct);
+    final Map <String,String>startingProduct;
+  ProductManager({this.startingProduct});
   @override
   _ProductManagerState createState() => _ProductManagerState();
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map<String,String>> _products = [];
   void initState(){
     if(widget.startingProduct!= null) {
       _products.add(widget.startingProduct);
     }
   super.initState();
   }
-  void _addProduct(String product){
+  void _addProduct(Map <String,String>product){
     setState(() {
 
       _products.add(product);

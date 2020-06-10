@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercoursee/pages/home.dart';
+import './pages/home.dart';
 
-import './product_manager.dart';
 void main() => runApp(MyApp());
 
 
 
 class MyApp extends StatelessWidget {
-  List<String> _products = ["Time Teaser"];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,19 +16,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.purple,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "E-Commerce Store",
-            style: TextStyle(
-              color: Colors.red[500],
-            ),
-          ),
-        ),
-        body: ProductManager("Raat Sharabi")
-
-
-        ),
+      home:HomePage(),
       );
 
   }
