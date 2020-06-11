@@ -4,7 +4,8 @@ import './pages/product.dart';
 
 class Products extends StatelessWidget{
 final List <Map<String,String>> _products;
-Products([this._products = const []]);
+final Function deleteProduct;
+Products(this._products ,{this.deleteProduct});
     Widget _buildList( BuildContext context, int index){
   return Card(
     child: Column(
@@ -16,12 +17,22 @@ Products([this._products = const []]);
           children: <Widget>[
 
            RaisedButton(
+
              onPressed: ()=>
-               Navigator.push(context, MaterialPageRoute(
+               Navigator.push<bool>(context, MaterialPageRoute(
                  builder: ( BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['title'])
+                     
                ),
 
-  ),child: Text("Confirm your Order"),
+  ).then((bool value){
+    if (value){
+      deleteProduct(index);
+    }
+
+  }
+
+               ),
+             child: Text("Confirm your Order"),
            )
           ],
         )

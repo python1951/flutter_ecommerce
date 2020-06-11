@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttercoursee/pages/home.dart';
-import './pages/home.dart';
+import 'package:fluttercoursee/pages/products.dart';
+import './pages/products.dart';
+import './pages/auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.purple,
       ),
-      home:HomePage(),
+      home:Auth(),
       );
 
   }

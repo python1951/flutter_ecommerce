@@ -23,6 +23,11 @@ class _ProductManagerState extends State<ProductManager> {
       _products.add(product);
     });
   }
+  void _deleteProduct (int index){
+    setState(() {
+      _products.removeAt(index);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +39,8 @@ class _ProductManagerState extends State<ProductManager> {
 
         ),
 
-        Expanded(child: Products(_products),)
+        Expanded(child: Products(_products,deleteProduct:_deleteProduct)
+          ,)
       ],
     );
   }
