@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:fluttercoursee/pages/products.dart';
 
-import './product.dart';
+
+import './products_create.dart';
+import './products_list.dart';
+import './products.dart';
+import'./product_admin.dart';
 import '../product_manager.dart';
 
 class ProductAdmin extends StatelessWidget{
-  ProductAdmin();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return DefaultTabController(
-      child: Scaffold(
+
+     length: 2 ,
+    child: Scaffold(
           drawer: Drawer(
             child: Column(
               children: <Widget>[
@@ -19,33 +23,45 @@ class ProductAdmin extends StatelessWidget{
                   automaticallyImplyLeading: false,
                 ),
                 ListTile(
-
                   title: Text("All Products"),
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (BuildContext context)=>Products()
+
                     ),
                     );
+
                   },
                 ),
-             ],
+              ],
             ),
           ),
           appBar: AppBar(
-            bottom: TabBar(
-              tabs: <Widget>[
-                Tab(text: "Create Products",),
-                Tab(text: "My Products",)
-              ],
-            ),
+
             title: Text(
-              "E-Commerce Store",
+              "Manage Products",
               style: TextStyle(
                 color: Colors.white,
               ),
             ),
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.create),
+                  text: "Create Products",),
+                Tab(icon: Icon(Icons.view_list),
+                  text: "View Products",)
+              ],
+            ),
           ),
-          body: Text("Welcome"),
+        body:TabBarView(
+      children: <Widget>[
+        ProductsCreate(),
+        ProductsList()
+
+      ],
+
+
+        ),
 
 
       ),
