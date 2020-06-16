@@ -15,9 +15,7 @@ class Auth extends StatelessWidget{
         child: RaisedButton(
           child: Text("Log in"),
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (BuildContext context) =>Products()
-            ),);
+          Navigator.pushReplacementNamed(context, '/');
           },
         ),
       ),

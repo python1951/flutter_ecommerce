@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercoursee/pages/product_admin.dart';
 import 'package:fluttercoursee/pages/products.dart';
 import './pages/products.dart';
 import './pages/auth.dart';
+import './products.dart';
+import './pages/product.dart';
+import './pages/products.dart';
 
 void main() => runApp(MyApp());
 
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  List <Map<String,String>> _products = [];
+  void addProduct(Map <String,String>product){
+    setState(() {
+
+      _products.add(product);
+    });
+  }
+  void deleteProduct (int index){
+    setState(() {
+      _products.removeAt(index);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,8 +37,37 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.purple,
       ),
-      home:Auth(),
-      );
+      routes: {
+        '/':(BuildContext context)=>ProductsPage(_products,addProduct,deleteProduct),
+        '/admin':(BuildContext context)=>ProductAdmin()
+      },
+      //home:Auth(),
+      onGenerateRoute: (RouteSettings settings){
+        final List<String> pathElements = settings.name.split('/');
+        if (pathElements[0]==''){
+          return  null;
+        }
+        if (pathElements[1] == 'products'){
+          final index = int.parse(pathElements[2]);
+          return  MaterialPageRoute<bool>(
+            builder: (BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['title']),
+          );
+
+        }
+        return null;
+
+
+      },
+      onUnknownRoute: (RouteSettings settings){
+        return MaterialPageRoute<bool>(builder: (BuildContext context)=>ProductsPage(_products,addProduct,deleteProduct)
+        );
+      },
+
+
+
+    );
 
   }
 }
+
+

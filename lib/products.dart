@@ -19,12 +19,8 @@ Products(this._products ,{this.deleteProduct});
            RaisedButton(
 
              onPressed: ()=>
-               Navigator.push<bool>(context, MaterialPageRoute(
-                 builder: ( BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['title'])
-                     
-               ),
-
-  ).then((bool value){
+               Navigator.pushNamed<bool>(context, '/products/'+index.toString())
+                   .then((bool value){
     if (value){
       deleteProduct(index);
     }
@@ -32,7 +28,7 @@ Products(this._products ,{this.deleteProduct});
   }
 
                ),
-             child: Text("Confirm your Order"),
+             child: Text("Confirm your Order ok"),
            )
           ],
         )

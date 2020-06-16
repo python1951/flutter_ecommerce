@@ -35,7 +35,30 @@ class Product extends StatelessWidget{
           RaisedButton(
             child: Text("Delete"),
             onPressed: (){
-              Navigator.pop(context,true);
+              showDialog(context:context,builder: (BuildContext context){
+               return  AlertDialog(
+                title: Text("Are you sure ?"),
+                 content: Text("This cannot be undone"),
+                 actions: <Widget>[
+                   FlatButton(
+                     child: Text("Continue"),
+                     onPressed: (){
+                       Navigator.pop(context);
+                       Navigator.pop(context,true);
+                     },
+                   ),
+                   FlatButton(
+                     child: Text("Discard"),
+                     onPressed: (){
+                       Navigator.pop(context);
+                     },
+                   )
+                 ],
+
+                );
+
+              },
+              );
             },
           )
         ],
