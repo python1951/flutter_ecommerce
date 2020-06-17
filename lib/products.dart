@@ -19,7 +19,7 @@ Products(this._products ,{this.deleteProduct});
            RaisedButton(
 
              onPressed: ()=>
-               Navigator.pushNamed<bool>(context, '/products/'+index.toString())
+               Navigator.pushNamed<bool>(context, '/products'+index.toString())
                    .then((bool value){
     if (value){
       deleteProduct(index);
@@ -28,7 +28,7 @@ Products(this._products ,{this.deleteProduct});
   }
 
                ),
-             child: Text("Confirm your Order ok"),
+             child: Text("Confirm your Order "),
            )
           ],
         )

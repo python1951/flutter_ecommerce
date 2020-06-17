@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
       margin: EdgeInsets.all(5),
       child: RaisedButton(
         onPressed: () {
-          addProduct({"title":"Confirm your order","imageUrl":"images/nighttime.jpg"});
+          addProduct({"title":"Confirm","imageUrl":"images/nighttime.jpg"});
         },
         color: Colors.green,
-        child: Text("Shop Online"),
+        child: Text("Shop Online..."),
       ),
     );
   }
