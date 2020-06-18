@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import './pages/product.dart';
 
 class Products extends StatelessWidget{
-final List <Map<String,String>> _products;
-final Function deleteProduct;
-Products(this._products ,{this.deleteProduct});
+final List <Map<String,dynamic>> _products;
+
+Products(this._products );
     Widget _buildList( BuildContext context, int index){
   return Card(
     child: Column(
@@ -19,13 +19,7 @@ Products(this._products ,{this.deleteProduct});
            RaisedButton(
 
              onPressed: ()=>
-               Navigator.pushNamed<bool>(context, '/products'+index.toString())
-                   .then((bool value){
-    if (value){
-      deleteProduct(index);
-    }
-
-  }
+               Navigator.pushNamed<bool>(context, '/products'+index.toString()
 
                ),
              child: Text("Confirm your Order "),

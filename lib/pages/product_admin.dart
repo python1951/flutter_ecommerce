@@ -8,6 +8,9 @@ import'./product_admin.dart';
 import '../product_manager.dart';
 
 class ProductAdmin extends StatelessWidget{
+  final Function addProduct;
+  final Function deleteProduct;
+  ProductAdmin(this.addProduct,this.deleteProduct);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -50,8 +53,8 @@ class ProductAdmin extends StatelessWidget{
           ),
         body:TabBarView(
       children: <Widget>[
-        ProductsCreate(),
-        ProductsList()
+        ProductsCreate(this.addProduct),
+        ProductsList(),
 
       ],
 

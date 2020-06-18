@@ -5,10 +5,10 @@ import'./product_admin.dart';
 import '../product_manager.dart';
 
 class ProductsPage extends StatelessWidget{
-  final List<Map<String,String>> _products ;
-  final Function addProduct;
-  final Function deleteProduct;
-  ProductsPage(this._products,this.addProduct,this.deleteProduct);
+  final List<Map<String,dynamic>> _products ;
+//  final Function addProduct;
+//  final Function deleteProduct;
+  ProductsPage(this._products);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -39,7 +39,7 @@ class ProductsPage extends StatelessWidget{
             ),
           ),
         ),
-        body: ProductManager(_products,addProduct,deleteProduct)
+        body: ProductManager(_products)
 
 
     );
