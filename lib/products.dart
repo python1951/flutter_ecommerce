@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import './pages/product.dart';
 
 class Products extends StatelessWidget{
-final List <Map<String,dynamic>> _products;
+final List <Map<String,dynamic>> products;
 
-Products(this._products );
+Products(this.products );
     Widget _buildList( BuildContext context, int index){
   return Card(
     child: Column(
+
       children: <Widget>[
-        Image.asset(_products[index]['imageUrl']),
-        Text(_products[index]['title']),
+      Image.asset(products[index]['imageUrl']),
+        Text(products[index]['title']),
         ButtonBar(
           alignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -19,9 +20,13 @@ Products(this._products );
            RaisedButton(
 
              onPressed: ()=>
-               Navigator.pushNamed<bool>(context, '/products'+index.toString()
+               Navigator.pushReplacement(context, MaterialPageRoute(
+                 builder: (BuildContext context) => Product('imageUrl','title')
+  )
 
                ),
+
+
              child: Text("Confirm your Order "),
            )
           ],
@@ -33,11 +38,11 @@ Products(this._products );
   @override
   Widget  build(BuildContext context){
 
-    return _products.length>0?ListView.builder(
+    return products.length>0?ListView.builder(
 
 
         itemBuilder: _buildList,
-        itemCount: _products.length,
+        itemCount: products.length,
     ): Center(
       child: Text(
           "OOPs no Products Available"),

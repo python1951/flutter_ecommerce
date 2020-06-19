@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/':(BuildContext context)=>ProductsPage(_products),
+        '/login':(BuildContext context) => Auth(),
         '/admin':(BuildContext context)=>ProductAdmin(addProduct,deleteProduct),
       },
       //home:Auth(),
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[0]==''){
           return  null;
         }
-        if (pathElements[1] == 'products'){
+        if (pathElements[1] == 'product'){
           final index = int.parse(pathElements[2]);
           return  MaterialPageRoute<bool>(
             builder: (BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['title']),

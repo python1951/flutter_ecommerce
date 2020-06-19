@@ -9,8 +9,8 @@ class ProductsCreate extends StatefulWidget {
 }
 
 class _ProductsCreateState extends State<ProductsCreate> {
-  String titleValue = 'a';
-  String description = 'a';
+  String titleValue = '';
+  String description = '';
   double priceValue = 0.0;
   @override
   Widget build(BuildContext context) {
@@ -44,14 +44,20 @@ class _ProductsCreateState extends State<ProductsCreate> {
               });
             },
           ),
+          SizedBox(
+            height: 10.0,
+          ),
           RaisedButton(
             child: Text("Save"),
+            color: Colors.purple,
+            textColor: Colors.white,
             onPressed: () {
+              Navigator.pushNamed(context, '/');
               Map<String, dynamic> product = {
                 "title": titleValue,
                 "desc": description,
                 "price": priceValue,
-                "image": 'images/nighttime.jpg',
+                "imageUrl": 'images/nighttime.jpg',
               };
               widget.addProduct(product);
             },

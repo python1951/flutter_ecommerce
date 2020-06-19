@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Product extends StatelessWidget{
-  final title;
-  final imageUrl;
+  final  String title;
+  final String imageUrl;
   Product(this.imageUrl,this.title);
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class Product extends StatelessWidget{
           title: Text(
           title,
           style: TextStyle(
-          color: Colors.red[500],
+          color: Colors.white,
       ),
       ),
       ),
       body:Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset(imageUrl),
+          Image.asset('images/nighttime.jpg'),
           Text(
               "Welcome to checkout"
           ),
