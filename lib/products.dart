@@ -13,7 +13,7 @@ class Products extends StatelessWidget {
           Image.asset(products[index]['imageUrl']),
           SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.only(left: 150,right: 20),
+            margin: EdgeInsets.only(left: 150, right: 20),
             child: Row(
               children: <Widget>[
                 Text(
@@ -24,25 +24,34 @@ class Products extends StatelessWidget {
                     fontFamily: "Oswald",
                   ),
                 ),
-                SizedBox(width: 5,),
+                SizedBox(
+                  width: 5,
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).accentColor,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 3,vertical: 2),
-                  child:
-                Text(
-                 '\$${ products[index]['price'].toString()}',
-                  style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Oswald",
-                ),),
+                  padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                  child: Text(
+                    '\$${products[index]['price'].toString()}',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Oswald",
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
+          Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey, width: 1.0),
+                borderRadius: BorderRadius.circular(3),
+              ),
+              padding: EdgeInsets.all(5),
+              child: Text("Round Square,Berlin,Germany")),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[

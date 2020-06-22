@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         accentColor: Colors.purple,
       ),
+//      home: Auth(),
       routes: {
         '/':(BuildContext context)=>ProductsPage(_products),
         '/login':(BuildContext context) => Auth(),
