@@ -3,7 +3,7 @@ import 'package:fluttercoursee/pages/product_admin.dart';
 import 'package:fluttercoursee/pages/products.dart';
 import './pages/products.dart';
 import './pages/auth.dart';
-import './products.dart';
+import './widgets/products/products.dart';
 import './pages/product.dart';
 import './pages/products.dart';
 
