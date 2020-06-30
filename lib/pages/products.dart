@@ -42,9 +42,8 @@ class ProductsPage extends StatelessWidget{
           ),
           actions: <Widget>[
 
-            Container(
-              margin: EdgeInsets.only(right: 20.0),
-              child: Icon(Icons.favorite,
+            IconButton(
+              icon: Icon(Icons.favorite,
                 color: Colors.white,
                 size: 20,
               ),

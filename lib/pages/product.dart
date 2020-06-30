@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:fluttercoursee/widgets/products/price_tag.dart';
 
 class Product extends StatelessWidget{
+
   final  String title;
   final String imageUrl;
-  Product(this.imageUrl,this.title);
+  Product(this.imageUrl,this.title,);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -32,6 +34,14 @@ class Product extends StatelessWidget{
           SizedBox(
             height: 12.0,
           ),
+          Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey, width: 1.0),
+                borderRadius: BorderRadius.circular(3),
+              ),
+              padding: EdgeInsets.all(5),
+              child: Text("Round Square,Berlin,Germany")),
+          PriceTag("89"),
           RaisedButton(
             child: Text("Delete"),
             onPressed: (){
