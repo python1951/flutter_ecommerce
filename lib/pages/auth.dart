@@ -13,6 +13,55 @@ class _AuthState extends State<Auth> {
   String passValue = '';
   bool _obscure = true;
   bool _acceptTerms = false;
+  DecorationImage _buildbackgroundImage(){
+    return DecorationImage(
+        image: AssetImage("images/background.jpg"),
+        fit: BoxFit.cover,
+        colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.5), BlendMode.dstATop)
+    );
+  }
+
+  Widget _buildEmailTextField(){
+    return TextField(
+      decoration: InputDecoration(labelText: "Email",filled: true,fillColor: Colors.white,),
+      keyboardType: TextInputType.emailAddress,
+      onChanged: (String value) {
+        emailValue = value;
+      },
+    );
+  }
+
+
+  Widget _buildPasswordField(){
+    return TextField(
+      decoration: InputDecoration(labelText: "Password",fillColor: Colors.white,filled: true),
+      obscureText: _obscure,
+      onChanged: (String value) {
+        setState(() {
+          passValue = value;
+        });
+      },
+    );
+  }
+
+
+  Widget _buildSwitchTile(){
+    return
+      SwitchListTile(
+          value: _acceptTerms,
+          title: Text("Accept Terms"),
+          onChanged: (bool value) {
+            setState((){
+              _acceptTerms = value;
+            });
+          }
+      );
+  }
+
+  void _buildSubmitForm(){
+    Navigator.pushNamed(context, '/admin');
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,43 +77,18 @@ class _AuthState extends State<Auth> {
           body: Center(
             child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/background.jpg"),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.5), BlendMode.dstATop))),
+                  image:_buildbackgroundImage()
+              ),
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
                   children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: "Email",filled: true,fillColor: Colors.white,),
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (String value) {
-                        emailValue = value;
-                      },
-                    ),
+                  _buildEmailTextField(),
 
                     SizedBox(height: 10.0,),
-                    TextField(
-                      decoration: InputDecoration(labelText: "Password",fillColor: Colors.white,filled: true),
-                      obscureText: _obscure,
-                      onChanged: (String value) {
-                        setState(() {
-                          passValue = value;
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                        value: _acceptTerms,
-                        title: Text("Accept Terms"),
-                        onChanged: (bool value) {
-                          setState((){
-                              _acceptTerms = value;
-                          });
-                        }
-                    ),
+                    _buildPasswordField(),
+                    _buildSwitchTile(),
                     SizedBox(height: 2.0,),
                     RaisedButton(
                       color: Theme.of(context).accentColor,
@@ -72,9 +96,7 @@ class _AuthState extends State<Auth> {
                         "Login",
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/admin');
-                      },
+                      onPressed:_buildSubmitForm,
                     )
                   ],
                 ),
