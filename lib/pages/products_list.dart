@@ -7,10 +7,10 @@ class ProductsList extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          Text("List od Products"),
+          Text("List of Products"),
           RaisedButton(
             onPressed: (){
-              Navigator.pushNamed(context,'/login');
+              Navigator.pushNamed(context,'/');
             },
             child: Text("PLease Login"),
           )

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProductsCreate extends StatefulWidget {
   final Function addProduct;
+
   ProductsCreate(this.addProduct);
   @override
   _ProductsCreateState createState() => _ProductsCreateState();
@@ -12,10 +13,11 @@ class _ProductsCreateState extends State<ProductsCreate> {
   String titleValue = '';
   String description = '';
   double priceValue = 0.0;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   Widget _buildTitleTextField(){
-    return  TextField(
+    return  TextFormField(
       decoration: InputDecoration(labelText: ("Title")),
-      onChanged: (String value) {
+      onSaved: (String value) {
         setState(() {
           titleValue = value;
         });
@@ -23,9 +25,9 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
   Widget _buildDescriptionTextField(){
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(labelText: ("Description")),
-      onChanged: (String value) {
+      onSaved: (String value) {
         setState(() {
           description = value;
         });
@@ -33,11 +35,11 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
   Widget _buildPriceTextField(){
-    return  TextField(
+    return  TextFormField(
       decoration: InputDecoration(labelText: ("Price")),
       keyboardType: TextInputType.number,
       maxLength: 3,
-      onChanged: (String value) {
+      onSaved: (String value) {
         setState(() {
           priceValue = double.parse(value);
         });
@@ -45,7 +47,8 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
   void _buildsumbitform(){
-    Navigator.pushNamed(context, '/');
+    _formkey.currentState.save();
+    Navigator.pushNamed(context, '/products');
     Map<String, dynamic> product = {
       "title": titleValue,
       "desc": description,
@@ -59,24 +62,32 @@ class _ProductsCreateState extends State<ProductsCreate> {
 
   @override
   Widget build(BuildContext context) {
+//    final double deviceWidth = MediaQuery.of(context).size.width;
+//    final double targetWidth = deviceWidth>550?500:0.9*deviceWidth;
+//    final double targetPadding = targetWidth - deviceWidth;
     return Container(
+      width: MediaQuery.of(context).size.width*0.9,
       margin: EdgeInsets.all(15),
-      child: ListView(
-        children: <Widget>[
-         _buildTitleTextField(),
-        _buildDescriptionTextField(),
-        _buildPriceTextField(),
-          SizedBox(
-            height: 10.0,
-          ),
-          RaisedButton(
-            child: Text("Save"),
-            color: Colors.purple,
-            textColor: Colors.white,
-            onPressed:_buildsumbitform,
+      child: Form(
+        child: ListView(
+          key: _formkey,
+//        padding: EdgeInsets.symmetric(horizontal: ),
+          children: <Widget>[
+           _buildTitleTextField(),
+          _buildDescriptionTextField(),
+          _buildPriceTextField(),
+            SizedBox(
+              height: 10.0,
+            ),
+            RaisedButton(
+              child: Text("Save"),
+              color: Colors.purple,
+              textColor: Colors.white,
+              onPressed:_buildsumbitform,
 
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

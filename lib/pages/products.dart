@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import '../widgets/products/products.dart';
 
-import'./product_admin.dart';
+import './product_admin.dart';
 
 import '../widgets/products/products.dart';
 
-class ProductsPage extends StatelessWidget{
-  final List<Map<String,dynamic>> _products ;
-//  final Function addProduct;
-//  final Function deleteProduct;
+class ProductsPage extends StatelessWidget {
+  final List<Map<String, dynamic>> _products;
+
   ProductsPage(this._products);
-  Widget _drawer(context){
-    Drawer(
+
+  Widget _drawer(context) {
+    return Drawer(
       child: Column(
         children: <Widget>[
           AppBar(
@@ -21,41 +21,38 @@ class ProductsPage extends StatelessWidget{
           ListTile(
             leading: Icon(Icons.create),
             title: Text("Manage Products"),
-            onTap: (){
+            onTap: () {
               Navigator.pushReplacementNamed(context, '/admin');
-
             },
           ),
         ],
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       drawer: _drawer(context),
-        appBar: AppBar(
-
-          title: Text(
-            "E-Commerce Store",
-            style: TextStyle(
+      appBar: AppBar(
+        title: Text(
+          "E-Commerce Store",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.favorite,
               color: Colors.white,
+              size: 20,
             ),
           ),
-          actions: <Widget>[
 
-            IconButton(
-              icon: Icon(Icons.favorite,
-                color: Colors.white,
-                size: 20,
-              ),
-            )
-          ],
-        ),
-        body: Products(_products)
-
-
+        ],
+      ),
+      body: Products(_products),
     );
   }
 }

@@ -13,7 +13,7 @@ class _AuthState extends State<Auth> {
   String passValue = '';
   bool _obscure = true;
   bool _acceptTerms = false;
-  DecorationImage _buildbackgroundImage(){
+  DecorationImage _buildBackgroundImage(){
     return DecorationImage(
         image: AssetImage("images/background.jpg"),
         fit: BoxFit.cover,
@@ -74,14 +74,14 @@ class _AuthState extends State<Auth> {
           appBar: AppBar(
             title: Text("Log-in"),
           ),
-          body: Center(
-            child: Container(
+          body: Container(
+            alignment: Alignment.center,
               decoration: BoxDecoration(
-                  image:_buildbackgroundImage()
+                  image:_buildBackgroundImage()
               ),
-              padding: EdgeInsets.all(10.0),
-              child: Center(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Container(
+                  width: MediaQuery.of(context).size.width*0.9,
                   child: Column(
                   children: <Widget>[
                   _buildEmailTextField(),
@@ -99,12 +99,12 @@ class _AuthState extends State<Auth> {
                       onPressed:_buildSubmitForm,
                     )
                   ],
+              ),
+              ),
                 ),
             ),
-              ),
             ),
-          ),
-        ),
-      );;
+
+      );
   }
 }
