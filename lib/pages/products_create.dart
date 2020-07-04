@@ -13,10 +13,18 @@ class _ProductsCreateState extends State<ProductsCreate> {
   String titleValue = '';
   String description = '';
   double priceValue = 0.0;
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Widget _buildTitleTextField(){
     return  TextFormField(
       decoration: InputDecoration(labelText: ("Title")),
+      autovalidate: true,
+      validator: (value){
+        if (value.isEmpty || value.length<5){
+          return "Input Required and Title must be 5+ characters";
+        }
+        return null;
+
+      },
       onSaved: (String value) {
         setState(() {
           titleValue = value;
@@ -27,6 +35,14 @@ class _ProductsCreateState extends State<ProductsCreate> {
   Widget _buildDescriptionTextField(){
     return TextFormField(
       decoration: InputDecoration(labelText: ("Description")),
+      autovalidate: true,
+      validator: (value){
+        if (value.isEmpty || value.length<10){
+          return "Input Required and Description must be 10+ characters";
+        }
+        return null;
+
+      },
       onSaved: (String value) {
         setState(() {
           description = value;
@@ -35,10 +51,19 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
   Widget _buildPriceTextField(){
+
     return  TextFormField(
       decoration: InputDecoration(labelText: ("Price")),
+    autovalidate: true,
+      validator: ( value){
+
+        if (value.isEmpty || !RegExp(r'^[0-9]*$').hasMatch(value)){
+          return 'Input Required and must be number';
+        }
+        return null;
+      },
       keyboardType: TextInputType.number,
-      maxLength: 3,
+      maxLength: 5,
       onSaved: (String value) {
         setState(() {
           priceValue = double.parse(value);
@@ -46,9 +71,19 @@ class _ProductsCreateState extends State<ProductsCreate> {
       },
     );
   }
-  void _buildsumbitform(){
-    _formkey.currentState.save();
-    Navigator.pushNamed(context, '/products');
+   void _buildSubmitForm(){
+     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+//    if(_formKey.currentState.validate()){
+//      return print("hello boss..ye kia baat hui yr");
+//
+//    }
+//    else{
+//      print("hota hy jani");
+//    }
+
+
+
     Map<String, dynamic> product = {
       "title": titleValue,
       "desc": description,
@@ -56,7 +91,8 @@ class _ProductsCreateState extends State<ProductsCreate> {
       "imageUrl": 'images/nighttime.jpg',
     };
     widget.addProduct(product);
-
+     _formKey.currentState.save();
+     Navigator.pushNamed(context, '/products');
 
   }
 
@@ -70,12 +106,12 @@ class _ProductsCreateState extends State<ProductsCreate> {
       margin: EdgeInsets.all(15),
       child: Form(
         child: ListView(
-          key: _formkey,
+          key: _formKey,
 //        padding: EdgeInsets.symmetric(horizontal: ),
           children: <Widget>[
-           _buildTitleTextField(),
-          _buildDescriptionTextField(),
-          _buildPriceTextField(),
+           Form(child: _buildTitleTextField()),
+          Form(child: _buildDescriptionTextField()),
+          Form(child:_buildPriceTextField()),
             SizedBox(
               height: 10.0,
             ),
@@ -83,7 +119,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
               child: Text("Save"),
               color: Colors.purple,
               textColor: Colors.white,
-              onPressed:_buildsumbitform,
+              onPressed:_buildSubmitForm,
 
             ),
           ],
