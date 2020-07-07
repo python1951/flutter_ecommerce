@@ -72,40 +72,15 @@ class _ProductsCreateState extends State<ProductsCreate> {
         return null;
       },
       keyboardType: TextInputType.number,
-      maxLength: 3,
+      maxLength: 5,
       onSaved: (String value) {
         print("description");
         _formData["priceValue"] = double.parse(value);
       },
     );
   }
-
-  void _buildSubmitForm() {
-    if (!_formKey.currentState.validate()) {
-      return;
-    }
-    _formKey.currentState.save();
-    if(widget.products==null){
-      widget.addProduct(_formData);
-    }
-    else{
-      widget.editProduct(widget.productIndex,_formData);
-    }
-
-
-
-
-
-      Navigator.pushNamed(context, '/products');
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-//    final double deviceWidth = MediaQuery.of(context).size.width;
-//    final double targetWidth = deviceWidth>550?500:0.9*deviceWidth;
-//    final double targetPadding = targetWidth - deviceWidth;
-    final Widget pageContent = GestureDetector(
+  Widget _buildGesture(){
+    return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
@@ -139,6 +114,34 @@ class _ProductsCreateState extends State<ProductsCreate> {
         ),
       ),
     );
+  }
+
+  void _buildSubmitForm() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+    if(widget.products==null){
+      widget.addProduct(_formData);
+    }
+    else{
+      widget.editProduct(widget.productIndex,_formData);
+    }
+
+
+
+
+
+      Navigator.pushNamed(context, '/products');
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+//    final double deviceWidth = MediaQuery.of(context).size.width;
+//    final double targetWidth = deviceWidth>550?500:0.9*deviceWidth;
+//    final double targetPadding = targetWidth - deviceWidth;
+    final Widget pageContent = _buildGesture();
     return widget.products == null ? pageContent : Scaffold(
       appBar: AppBar(
         title: Text("Edit Product"),
