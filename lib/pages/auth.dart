@@ -8,6 +8,7 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool acceptTerms = true;
   String emailValue = '';
   String passValue = '';
@@ -23,10 +24,20 @@ class _AuthState extends State<Auth> {
   }
 
   Widget _buildEmailTextField(){
-    return TextField(
+    return TextFormField(
+      validator: (value){
+        if (value.isEmpty || !value.trimRight().contains("@")){
+          return ("Please provide a valid email accout!");
+
+        }
+        return null;
+
+      }
+      ,
       decoration: InputDecoration(labelText: "Email",filled: true,fillColor: Colors.white,),
       keyboardType: TextInputType.emailAddress,
-      onChanged: (String value) {
+      
+      onSaved: (String value) {
         emailValue = value;
       },
     );
@@ -34,10 +45,16 @@ class _AuthState extends State<Auth> {
 
 
   Widget _buildPasswordField(){
-    return TextField(
+    return TextFormField(
+      validator: (value){
+        if (value.isEmpty || value.length<8 || !value.contains(new RegExp("^(?=.*[A-Z].*[A-Z])(?=.*[0-9].*[0-9]).{8}"))){
+          return "Please provide a valid password ";
+        }
+        return null;
+      },
       decoration: InputDecoration(labelText: "Password",fillColor: Colors.white,filled: true),
       obscureText: _obscure,
-      onChanged: (String value) {
+      onSaved: (String value) {
         setState(() {
           passValue = value;
         });
@@ -60,6 +77,11 @@ class _AuthState extends State<Auth> {
   }
 
   void _buildSubmitForm(){
+    if (!_formKey.currentState.validate()){
+      return;
+    }
+    //_formKey.currentState.save();
+    
     Navigator.pushNamed(context, '/admin');
   }
   @override
@@ -79,29 +101,32 @@ class _AuthState extends State<Auth> {
               decoration: BoxDecoration(
                   image:_buildBackgroundImage()
               ),
-              child: SingleChildScrollView(
-                child: Container(
-                  width: MediaQuery.of(context).size.width*0.9,
-                  child: Column(
-                  children: <Widget>[
-                  _buildEmailTextField(),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*0.9,
+                    child: Column(
+                    children: <Widget>[
+                    _buildEmailTextField(),
 
-                    SizedBox(height: 10.0,),
-                    _buildPasswordField(),
-                    _buildSwitchTile(),
-                    SizedBox(height: 2.0,),
-                    RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed:_buildSubmitForm,
-                    )
-                  ],
-              ),
-              ),
+                      SizedBox(height: 10.0,),
+                      _buildPasswordField(),
+                      _buildSwitchTile(),
+                      SizedBox(height: 2.0,),
+                      RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        child: Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed:_buildSubmitForm,
+                      )
+                    ],
                 ),
+                ),
+                  ),
+              ),
             ),
             ),
 

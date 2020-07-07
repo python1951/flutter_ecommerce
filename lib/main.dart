@@ -24,6 +24,11 @@ class _MyAppState extends State<MyApp> {
       _products.add(product);
     });
   }
+  void editProduct( index,Map<String,dynamic>product){
+    setState(() {
+      _products[index]=product;
+    });
+  }
   void deleteProduct (int index){
     setState(() {
       _products.removeAt(index);
@@ -41,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/products':(BuildContext context)=>ProductsPage(_products),
         '/':(BuildContext context) => Auth(),
-        '/admin':(BuildContext context)=>ProductAdmin(addProduct,deleteProduct,_products),
+        '/admin':(BuildContext context)=>ProductAdmin(addProduct,deleteProduct,_products,editProduct),
       },
       //home:Auth(),
       onGenerateRoute: (RouteSettings settings){
@@ -52,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == 'product'){
           final index = int.parse(pathElements[2]);
           return  MaterialPageRoute<bool>(
-            builder: (BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['title']),
+            builder: (BuildContext context)=>Product(_products[index]['imageUrl'],_products[index]['titleValue'],_products[index]['priceValue'],_products[index]['description']),
           );
 
         }

@@ -13,15 +13,15 @@ class ProductCard extends StatelessWidget{
 
   Widget _buildTitlePrice(){
     return Container(
-      margin: EdgeInsets.only(left: 150, right: 20),
+     margin: EdgeInsets.only(left: 150, right: 20),
       child: Row(
         children: <Widget>[
-          SizedBox(height: 1.0,),
+          SizedBox(height: 1.0),
           SizedBox(
             width: 5,
           ),
-          TitleDefault(product['title']),
-          PriceTag(product['price'].toString())
+          TitleDefault(product['titleValue']),
+          PriceTag(product['priceValue'].toString())
 
         ],
       ),
@@ -38,7 +38,7 @@ class ProductCard extends StatelessWidget{
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      Product('imageUrl', 'title',))),
+                      Product('imageUrl', 'titleValue','priceValue',"description"))),
 
         ),
 

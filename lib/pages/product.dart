@@ -5,12 +5,17 @@ import 'package:fluttercoursee/widgets/ui_elements/title_default.dart';
 import '../widgets/ui_elements/title_default.dart';
 
 class Product extends StatelessWidget {
-  final String title;
+  final String titleValue;
   final String imageUrl;
+  final String description;
+  final String priceValue;
+
 
   Product(
     this.imageUrl,
-    this.title,
+    this.titleValue,
+      this.priceValue,
+      this.description
   );
 
   Widget _buildAddressPriceRow() {
@@ -27,7 +32,7 @@ class Product extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 4.0),
             child: Text("|"),
           ),
-          PriceTag("90"),
+          PriceTag(priceValue),
         ],
       ),
     );
@@ -44,7 +49,7 @@ class Product extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             title: Text(
-              title,
+              "Checkout",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -64,7 +69,8 @@ class Product extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3),
                   ),
                   padding: EdgeInsets.all(5),
-                  child: TitleDefault(title)),
+                  child: TitleDefault(titleValue)
+              ),
               _buildAddressPriceRow(),
               RaisedButton(
                 child: Text("Delete"),
