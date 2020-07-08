@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../../pages/product.dart';
 import './price_tag.dart';
 import 'price_tag.dart';
+import '../../models/product.dart'  ;
 import 'product_card.dart';
 class Products extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
 
   Products(this.products);
 

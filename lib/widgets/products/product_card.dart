@@ -6,8 +6,9 @@ import 'address_tag.dart';
 import  '../ui_elements/title_default.dart';
 import '../../pages/product.dart';
 import 'products.dart';
+import '../../models/product.dart';
 class ProductCard extends StatelessWidget{
-  final Map<String,dynamic> product;
+  final Product product;
   final int productIndex;
   ProductCard(this.product,this.productIndex);
 
@@ -16,12 +17,9 @@ class ProductCard extends StatelessWidget{
      margin: EdgeInsets.only(left: 150, right: 20),
       child: Row(
         children: <Widget>[
-          SizedBox(height: 1.0),
-          SizedBox(
-            width: 5,
-          ),
-          TitleDefault(product['titleValue']),
-          PriceTag(product['priceValue'].toString())
+          TitleDefault(product.title),
+          SizedBox(width: 9,),
+          PriceTag(product.price.toString())
 
         ],
       ),
@@ -38,7 +36,7 @@ class ProductCard extends StatelessWidget{
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      Product('imageUrl', 'titleValue','priceValue',"description"))),
+                      ProductCheck('image', 'title','price',"description"))),
 
         ),
 
@@ -57,7 +55,7 @@ class ProductCard extends StatelessWidget{
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset(product['imageUrl']),
+          Image.asset(product.image),
           SizedBox(height: 10),
           _buildTitlePrice(),
           AddressTag("Round Square,Berlin,Germany"),

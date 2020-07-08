@@ -4,17 +4,17 @@ import 'package:fluttercoursee/widgets/products/price_tag.dart';
 import 'package:fluttercoursee/widgets/ui_elements/title_default.dart';
 import '../widgets/ui_elements/title_default.dart';
 
-class Product extends StatelessWidget {
-  final String titleValue;
-  final String imageUrl;
+class ProductCheck extends StatelessWidget {
+  final String title;
+  final String image;
   final String description;
-  final String priceValue;
+  final String price;
 
 
-  Product(
-    this.imageUrl,
-    this.titleValue,
-      this.priceValue,
+  ProductCheck(
+    this.image,
+    this.title,
+      this.price,
       this.description
   );
 
@@ -32,7 +32,7 @@ class Product extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 4.0),
             child: Text("|"),
           ),
-          PriceTag(priceValue),
+          PriceTag(price),
         ],
       ),
     );
@@ -69,7 +69,7 @@ class Product extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3),
                   ),
                   padding: EdgeInsets.all(5),
-                  child: TitleDefault(titleValue)
+                  child: TitleDefault(title)
               ),
               _buildAddressPriceRow(),
               RaisedButton(

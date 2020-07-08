@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../widgets/products/products.dart';
-
+import '../models/product.dart';
 import './product_admin.dart';
 
 import '../widgets/products/products.dart';
 
 class ProductsPage extends StatelessWidget {
-  final List<Map<String, dynamic>> _products;
+  final List< Product> _products;
 
   ProductsPage(this._products);
 

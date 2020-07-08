@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../models/product.dart';
 class ProductsCreate extends StatefulWidget {
   final Function addProduct;
-  final Map<String,dynamic> products;
+  final Product products;
   final Function editProduct;
   final int productIndex;
   ProductsCreate({this.addProduct,this.products,this.editProduct,this.productIndex});
@@ -17,34 +17,34 @@ class _ProductsCreateState extends State<ProductsCreate> {
   double priceValue = 0.0;
 
   final Map<String, dynamic> _formData = {
-    "titleValue": null,
+    "title": null,
     "description": null,
-    "priceValue": null,
-    "imageUrl": 'images/nighttime.jpg',
+    "price": null,
+    "image": 'images/nighttime.jpg',
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget _buildTitleTextField() {
     return TextFormField(
-    initialValue: widget.products==null?"":widget.products["titleValue"],
+    initialValue: widget.products==null?"":widget.products.title,
       decoration: InputDecoration(labelText: ("Title")),
 
       validator: (value) {
-        if (value.isEmpty || value.length < 5) {
+        if (value.isEmpty || value.length < 4) {
           return "Input Required and Title must be 5+ characters";
         }
         return null;
       },
       onSaved: (String value) {
         print("description");
-        _formData["titleValue"] = value;
+        _formData["title"] = value;
       },
     );
   }
 
   Widget _buildDescriptionTextField() {
     return TextFormField(
-     initialValue: widget.products==null?"":widget.products["description"],
+     initialValue: widget.products==null?"":widget.products.description,
       decoration: InputDecoration(labelText: ("Description")),
 
       validator: (value) {
@@ -62,7 +62,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
 
   Widget _buildPriceTextField() {
     return TextFormField(
-      initialValue: widget.products==null?"":widget.products["priceValue"].toString(),
+      initialValue: widget.products==null?"":widget.products.price.toString(),
       decoration: InputDecoration(labelText: ("Price")),
 
       validator: (value) {
@@ -75,7 +75,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
       maxLength: 5,
       onSaved: (String value) {
         print("description");
-        _formData["priceValue"] = double.parse(value);
+        _formData["price"] = double.parse(value);
       },
     );
   }
@@ -122,10 +122,19 @@ class _ProductsCreateState extends State<ProductsCreate> {
     }
     _formKey.currentState.save();
     if(widget.products==null){
-      widget.addProduct(_formData);
+      widget.addProduct(Product(
+        title: _formData['title'],
+        description: _formData["description"],
+        price: _formData['price'],
+        image: _formData['image'],
+      ));
     }
     else{
-      widget.editProduct(widget.productIndex,_formData);
+      widget.editProduct(widget.productIndex,Product( title: _formData['title'],
+        description: _formData["description"],
+        price: _formData['price'],
+        image: _formData['image'],)
+      );
     }
 
 

@@ -5,13 +5,12 @@ import './products_create.dart';
 import './products_list.dart';
 import './products.dart';
 import'./product_admin.dart';
-
-
+import '../models/product.dart';
 class ProductAdmin extends StatelessWidget{
   final Function addProduct;
   final Function deleteProduct;
   final Function editProduct;
-  final List<Map<String,dynamic>> _products;
+  final List<Product> _products;
   ProductAdmin(this.addProduct,this.deleteProduct,this._products,this.editProduct);
 
   Widget _buildDrawer(context){
