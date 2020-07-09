@@ -18,6 +18,7 @@ class ProductCheck extends StatelessWidget {
 
   Widget _buildAddressPriceRow(price) {
     return Container(
+      margin: EdgeInsets.only(left: 7),
       child: Row(
         children: <Widget>[
           Text(

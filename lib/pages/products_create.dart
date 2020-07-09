@@ -78,7 +78,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
 
-  Widget _buildPageContent(BuildContext context,Product product) {
+  Widget _buildPageContent(BuildContext context,Product product,MainModel model) {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -105,9 +105,9 @@ class _ProductsCreateState extends State<ProductsCreate> {
     );
   }
 
-  void _buildSubmitForm(Function addProduct, Function editProduct,int selectedProductIndex) {
+    Widget _buildSubmitForm(Function addProduct, Function editProduct,[int selectedProductIndex]) {
     if (!_formKey.currentState.validate()) {
-      return;
+      return null;
     }
     _formKey.currentState.save();
     if (selectedProductIndex == null) {
@@ -145,12 +145,12 @@ class _ProductsCreateState extends State<ProductsCreate> {
 
   @override
   Widget build(BuildContext context) {
-//    final double deviceWidth = MediaQuery.of(context).size.width;
+//    final double deviceWidth = MediaQuery.Eof(context).size.width;
 //    final double targetWidth = deviceWidth>550?500:0.9*deviceWidth;
 //    final double targetPadding = targetWidth - deviceWidth;
 
     return ScopedModelDescendant<MainModel>(builder: (BuildContext context,Widget child,MainModel model){
-      final Widget pageContent = _buildPageContent(context,model.selectedProduct);
+      final Widget pageContent = _buildPageContent(context,model.selectedProduct,model);
       return model.selectedProductIndex == null
           ? pageContent
           : Scaffold(
