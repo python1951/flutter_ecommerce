@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercoursee/scoped_models/products.dart';
 import 'package:fluttercoursee/widgets/products/address_tag.dart';
 import 'package:fluttercoursee/widgets/ui_elements/title_default.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'price_tag.dart';
 import 'address_tag.dart';
 import  '../ui_elements/title_default.dart';
@@ -36,14 +38,19 @@ class ProductCard extends StatelessWidget{
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      ProductCheck('image', 'title','price',"description"))),
+                      ProductCheck(productIndex))),
 
         ),
 
-        IconButton(
-          icon: Icon(Icons.favorite_border,color: Colors.red[500]),
-          onPressed: (){},
-        )
+        ScopedModelDescendant<ProductModel>(builder: (BuildContext context,Widget child,ProductModel model){
+          return IconButton(
+            icon: Icon(model.product[productIndex].isFavourite?Icons.favorite_border:Icons.favorite,color: Colors.red[500],),
+            onPressed: (){
+              model.selectProduct(productIndex);
+              model.toggleFavouriteIcon();
+            },
+          );
+        },)
 
 
       ],
