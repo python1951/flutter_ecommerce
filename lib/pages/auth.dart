@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercoursee/pages/products.dart';
+import 'package:fluttercoursee/scoped_models/main.dart';
+import 'package:scoped_model/scoped_model.dart';
 import './product.dart';
+import '../scoped_models/main.dart';
 
 class Auth extends StatefulWidget {
   @override
@@ -8,6 +11,12 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
+  final Map<String,dynamic>_formData = {
+    "emailValue":null,
+    "passValue":null,
+    "acceptTerms":false,
+
+  };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool acceptTerms = true;
   String emailValue = '';
@@ -76,12 +85,13 @@ class _AuthState extends State<Auth> {
       );
   }
 
-  void _buildSubmitForm(){
+  void _buildSubmitForm(Function Login){
     if (!_formKey.currentState.validate()){
       return;
     }
-    //_formKey.currentState.save();
-    
+    _formKey.currentState.save();
+    Login(_formData['emailValue'],_formData['passwordValue']);
+
     Navigator.pushNamed(context, '/admin');
   }
   @override
@@ -114,14 +124,16 @@ class _AuthState extends State<Auth> {
                       _buildPasswordField(),
                       _buildSwitchTile(),
                       SizedBox(height: 2.0,),
-                      RaisedButton(
-                        color: Theme.of(context).accentColor,
-                        child: Text(
-                          "Login",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed:_buildSubmitForm,
-                      )
+                      ScopedModelDescendant<MainModel>(builder:(BuildContext context,Widget child,MainModel model){
+                        return RaisedButton(
+                          color: Theme.of(context).accentColor,
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed:()=>_buildSubmitForm(model.login),
+                        );
+                      } ,)
                     ],
                 ),
                 ),

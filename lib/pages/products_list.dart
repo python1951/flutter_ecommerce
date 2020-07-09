@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercoursee/pages/products_create.dart';
 import '../models/product.dart';
+import '../scoped_models/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../scoped_models/products.dart';
 class ProductsList extends StatelessWidget {
 
-  Widget _buildEditButton(BuildContext context,index,ProductModel model){
+  Widget _buildEditButton(BuildContext context,index,MainModel model){
 
 
       return IconButton(
@@ -23,7 +24,7 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ScopedModelDescendant<ProductModel>(builder :(BuildContext context ,Widget child, ProductModel model){
+    return ScopedModelDescendant<MainModel>(builder :(BuildContext context ,Widget child, MainModel model){
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Dismissible(

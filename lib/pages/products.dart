@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/products/products.dart';
-
+import '../models/product.dart';
 import './product_admin.dart';
-
+import '../scoped_models/main.dart';
 import '../widgets/products/products.dart';
-
+import 'package:scoped_model/scoped_model.dart';
+import '../scoped_models/products.dart';
 class ProductsPage extends StatelessWidget {
 
 
@@ -40,13 +41,20 @@ class ProductsPage extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.favorite,
-              color: Colors.white,
-              size: 20,
-            ),
-          ),
+         ScopedModelDescendant<MainModel>(builder: (BuildContext context,Widget child,MainModel model){return IconButton(
+           icon: Icon(model.displayFavouritesOnly?
+
+             Icons.favorite:Icons.favorite_border,
+             color: Colors.white,
+             size: 20,
+
+           ),
+           onPressed: (){
+          model.toggleFavouriteList();
+
+           },
+         );
+         },)
 
         ],
       ),

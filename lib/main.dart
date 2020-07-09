@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercoursee/pages/product_admin.dart';
 import 'package:fluttercoursee/pages/products.dart';
-import 'package:fluttercoursee/scoped_models/products.dart';
 import './pages/products.dart';
 import './pages/auth.dart';
 import './widgets/products/products.dart';
 import './pages/product.dart';
 //import './pages/products.dart';
 import './models/product.dart' ;
+import './scoped_models/main.dart';
 import 'package:scoped_model/scoped_model.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -23,8 +24,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<ProductModel>(
-      model: ProductModel(),
+    return ScopedModel<MainModel>(
+      model: MainModel(),
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,

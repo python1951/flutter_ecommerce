@@ -5,6 +5,7 @@ import 'package:fluttercoursee/widgets/ui_elements/title_default.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'price_tag.dart';
 import 'address_tag.dart';
+import '../../scoped_models/main.dart';
 import  '../ui_elements/title_default.dart';
 import '../../pages/product.dart';
 import 'products.dart';
@@ -42,9 +43,9 @@ class ProductCard extends StatelessWidget{
 
         ),
 
-        ScopedModelDescendant<ProductModel>(builder: (BuildContext context,Widget child,ProductModel model){
+        ScopedModelDescendant<MainModel>(builder: (BuildContext context,Widget child,MainModel model){
           return IconButton(
-            icon: Icon(model.product[productIndex].isFavourite?Icons.favorite_border:Icons.favorite,color: Colors.red[500],),
+            icon: Icon(model.product[productIndex].isFavourite?Icons.favorite:Icons.favorite_border,color: Colors.red[500],),
             onPressed: (){
               model.selectProduct(productIndex);
               model.toggleFavouriteIcon();

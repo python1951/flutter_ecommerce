@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
 import '../models/product.dart';
+import '../scoped_models/main.dart';
 import '../scoped_models/products.dart';
 class ProductsCreate extends StatefulWidget {
 
@@ -131,8 +132,8 @@ class _ProductsCreateState extends State<ProductsCreate> {
   }
 
   Widget _buildSubmitButton() {
-    return ScopedModelDescendant<ProductModel>(
-        builder: (BuildContext context, Widget child, ProductModel model) {
+    return ScopedModelDescendant<MainModel>(
+        builder: (BuildContext context, Widget child, MainModel model) {
       return RaisedButton(
         child: Text("Save"),
         color: Colors.purple,
@@ -148,7 +149,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
 //    final double targetWidth = deviceWidth>550?500:0.9*deviceWidth;
 //    final double targetPadding = targetWidth - deviceWidth;
 
-    return ScopedModelDescendant<ProductModel>(builder: (BuildContext context,Widget child,ProductModel model){
+    return ScopedModelDescendant<MainModel>(builder: (BuildContext context,Widget child,MainModel model){
       final Widget pageContent = _buildPageContent(context,model.selectedProduct);
       return model.selectedProductIndex == null
           ? pageContent
