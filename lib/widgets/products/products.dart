@@ -12,11 +12,11 @@ class Products extends StatelessWidget {
 
 
   Products();
-  Widget _buildProducts(List<Product> products ){
-    return products.length > 0
+  Widget _buildProducts(List<Product> product ){
+    return product.length > 0
         ? ListView.builder(
-      itemBuilder: (BuildContext context,int index)=>ProductCard(products[index],index),
-      itemCount: products.length,
+      itemBuilder: (BuildContext context,int index)=>ProductCard(product[index],index),
+      itemCount: product.length,
     )
         : Center(
       child: Text("Add Products"),

@@ -1,8 +1,8 @@
 import 'package:scoped_model/scoped_model.dart';
 import '../models/user.dart';
-class UserModel extends Model{
-  User _authenticatedUser;
+import 'connected_products.dart';
+class UserModel extends ConnectedProducts{
   void login (email,password){
-    _authenticatedUser = User(id:89 ,email: email,password: password);
+    authenticatedUser = User(id:"89" ,email: email,password: password);
   }
 }

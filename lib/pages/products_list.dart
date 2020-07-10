@@ -36,7 +36,7 @@ class ProductsList extends StatelessWidget {
                 print("o");
               }
             },
-            key: Key(model.product[index].title),
+            key: Key(model.allProduct[index].title),
             background: Container(
               color: Colors.red,
             ),
@@ -45,10 +45,10 @@ class ProductsList extends StatelessWidget {
                 ListTile(
                     leading: CircleAvatar(
                         backgroundImage:
-                        AssetImage(model.product[index].image)),
-                    title: Text(model.product[index].title),
+                        AssetImage(model.allProduct[index].image)),
+                    title: Text(model.allProduct[index].title),
                     subtitle:
-                    Text('\$${model.product[index].price.toString()}'),
+                    Text('\$${model.allProduct[index].price.toString()}'),
                     trailing: _buildEditButton(context, index,model)
                 ),
                 Divider(),
@@ -56,7 +56,7 @@ class ProductsList extends StatelessWidget {
             ),
           );
         },
-        itemCount: model.product.length,
+        itemCount: model.allProduct.length,
       );
     });
   }

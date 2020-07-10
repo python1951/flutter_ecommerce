@@ -1,81 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercoursee/scoped_models/connected_products.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
-class ProductsModel extends Model{
-  List <Product> _products = [];
-  int _selectedProductIndex;
+import 'connected_products.dart';
+
+class ProductsModel extends ConnectedProducts {
   bool _showFavourites = false;
 
-  List <Product> get product{
-    return List.from(_products);
+  List<Product> get allProduct {
+    return List.from(products);
+  }
 
-  }
-  List <Product> get favProducts{
-    if (_showFavourites){
-      return _products.where((Product product) => product.isFavourite).toList();
+  List<Product> get favProducts {
+    if (_showFavourites) {
+      return products.where((Product product) => product.isFavourite).toList();
     }
-    return List.from(_products);
+    return List.from(products);
   }
-  bool get displayFavouritesOnly{
+
+  bool get displayFavouritesOnly {
     return _showFavourites;
   }
 
-
   Product get selectedProduct {
-    if(_selectedProductIndex == null){
+    if (selectedProductIndex == null) {
       return null;
     }
 
-
-      _products[_selectedProductIndex];
+    return products[selectedProductIndex];
   }
 
   int get selectedProductIndex {
-    return _selectedProductIndex;
+    return sellProducts;
   }
-  void addProduct(Product product){
 
+  void editProduct(
+      String title, String description, String image, double price) {
+    final Product updatedProduct = Product(
+        title: title,
+        description: description,
+        image: image,
+        price: price,
+        userEmail: products[sellProducts].userEmail,
+        userId: products[sellProducts].userId);
 
-      _products.add(product);
-      _selectedProductIndex = null;
-      notifyListeners();
-
+    products[selectedProductIndex] = updatedProduct;
+    sellProducts = null;
   }
-  void editProduct( Product product){
 
-      _products[_selectedProductIndex]=product;
-        _selectedProductIndex = null;
-        notifyListeners();
+  void deleteProduct() {
+    products.removeAt(selectedProductIndex);
+    sellProducts = null;
   }
-  void deleteProduct (){
 
-      _products.removeAt(_selectedProductIndex);
-      _selectedProductIndex = null;
-      notifyListeners();
-  }
-  void selectProduct(int index){
-
-    _selectedProductIndex = index;
+  void selectProduct(int index) {
+    sellProducts = index;
     notifyListeners();
   }
-  void toggleFavouriteIcon(){
-    final bool isCurrentFavourite = _products[selectedProductIndex].isFavourite;
+
+  void toggleFavouriteIcon() {
+    final bool isCurrentFavourite = products[selectedProductIndex].isFavourite;
     final bool isNewFavourite = !isCurrentFavourite;
     final Product newProduct = new Product(
-      title: _products[selectedProductIndex].title,
-      description: _products[selectedProductIndex].description,
-      price: _products[selectedProductIndex].price,
-      image: _products[selectedProductIndex].image,
+      title: products[sellProducts].title,
+      description: products[sellProducts].description,
+      price: products[sellProducts].price,
+      image: products[sellProducts].image,
+      userEmail: products[sellProducts].userEmail,
+      userId: products[sellProducts].userId,
       isFavourite: isNewFavourite,
-
     );
-    _products[_selectedProductIndex] = newProduct;
-    _selectedProductIndex = null;
+    products[sellProducts] = newProduct;
+    sellProducts = null;
     notifyListeners();
   }
-  void toggleFavouriteList(){
+
+  void toggleFavouriteList() {
     _showFavourites = !_showFavourites;
     notifyListeners();
   }
-
 }
