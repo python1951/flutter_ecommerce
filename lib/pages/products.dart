@@ -5,7 +5,7 @@ import './product_admin.dart';
 import '../scoped_models/main.dart';
 import '../widgets/products/products.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../scoped_models/products.dart';
+
 class ProductsPage extends StatelessWidget {
 
 

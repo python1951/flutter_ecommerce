@@ -3,7 +3,7 @@ import 'package:fluttercoursee/pages/products_create.dart';
 import '../models/product.dart';
 import '../scoped_models/main.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../scoped_models/products.dart';
+
 class ProductsList extends StatelessWidget {
 
   Widget _buildEditButton(BuildContext context,index,MainModel model){
@@ -36,7 +36,7 @@ class ProductsList extends StatelessWidget {
                 print("o");
               }
             },
-            key: Key(model.allProduct[index].title),
+            key: Key(model.allProducts[index].title),
             background: Container(
               color: Colors.red,
             ),
@@ -45,10 +45,10 @@ class ProductsList extends StatelessWidget {
                 ListTile(
                     leading: CircleAvatar(
                         backgroundImage:
-                        AssetImage(model.allProduct[index].image)),
-                    title: Text(model.allProduct[index].title),
+                        AssetImage(model.allProducts[index].image)),
+                    title: Text(model.allProducts[index].title),
                     subtitle:
-                    Text('\$${model.allProduct[index].price.toString()}'),
+                    Text('\$${model.allProducts[index].price.toString()}'),
                     trailing: _buildEditButton(context, index,model)
                 ),
                 Divider(),
@@ -56,7 +56,7 @@ class ProductsList extends StatelessWidget {
             ),
           );
         },
-        itemCount: model.allProduct.length,
+        itemCount: model.allProducts.length,
       );
     });
   }

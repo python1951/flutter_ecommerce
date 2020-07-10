@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
-import '../models/product.dart';
+
 import '../scoped_models/main.dart';
-import '../scoped_models/products.dart';
 
 class ProductsCreate extends StatefulWidget {
   @override
@@ -24,9 +23,7 @@ class _ProductsCreateState extends State<ProductsCreate> {
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildTitleTextField(
-    Product product,
-  ) {
+  Widget _buildTitleTextField(Product product) {
     return TextFormField(
       initialValue: product == null ? "" : product.title,
       decoration: InputDecoration(labelText: ("Title")),
@@ -84,33 +81,36 @@ class _ProductsCreateState extends State<ProductsCreate> {
     BuildContext context,
     Product product,
   ) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.all(15),
-        child: Form(
-          key: _formKey,
-          child: ListView(
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          margin: EdgeInsets.all(15),
+          child: Form(
+            key: _formKey,
+            child: ListView(
 //        padding: EdgeInsets.symmetric(horizontal: ),
-            children: <Widget>[
-              _buildTitleTextField(product),
-              _buildDescriptionTextField(product),
-              _buildPriceTextField(product),
-              SizedBox(
-                height: 10.0,
-              ),
-              _buildSubmitButton(),
-            ],
+              children: <Widget>[
+                _buildTitleTextField(product),
+                _buildDescriptionTextField(product),
+                _buildPriceTextField(product),
+                SizedBox(
+                  height: 10.0,
+                ),
+                _buildSubmitButton(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void _buildSubmitForm(Function addProduct, Function editProduct,
+  void _buildSubmitForm(
+      Function addProduct, Function editProduct, Function setSelectedProduct,
       [int selectedProductIndex]) {
     if (!_formKey.currentState.validate()) {
       return null;
@@ -132,7 +132,8 @@ class _ProductsCreateState extends State<ProductsCreate> {
       );
     }
 
-    Navigator.pushNamed(context, '/products');
+    Navigator.pushNamed(context, '/products')
+        .then((_) => setSelectedProduct(null));
   }
 
   Widget _buildSubmitButton() {
@@ -142,8 +143,8 @@ class _ProductsCreateState extends State<ProductsCreate> {
         child: Text("Save"),
         color: Colors.purple,
         textColor: Colors.white,
-        onPressed: () => _buildSubmitForm(
-            model.addProduct, model.editProduct, model.selectedProductIndex),
+        onPressed: () => _buildSubmitForm(model.addProduct, model.editProduct,
+            model.selectProduct, model.selectedProductIndex),
       );
     });
   }

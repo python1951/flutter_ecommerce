@@ -3,6 +3,7 @@ import 'package:fluttercoursee/pages/products.dart';
 import 'package:fluttercoursee/scoped_models/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './product.dart';
+import '../scoped_models/connected_products.dart';
 import '../scoped_models/main.dart';
 
 class Auth extends StatefulWidget {
@@ -12,15 +13,15 @@ class Auth extends StatefulWidget {
 
 class _AuthState extends State<Auth> {
   final Map<String,dynamic>_formData = {
-    "emailValue":null,
-    "passValue":null,
+    "email":"",
+    "password":null,
     "acceptTerms":false,
 
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool acceptTerms = true;
-  String emailValue = '';
-  String passValue = '';
+  String email = '';
+  String password = '';
   bool _obscure = true;
   bool _acceptTerms = false;
   DecorationImage _buildBackgroundImage(){
@@ -47,7 +48,7 @@ class _AuthState extends State<Auth> {
       keyboardType: TextInputType.emailAddress,
       
       onSaved: (String value) {
-        emailValue = value;
+        _formData['email'] = value;
       },
     );
   }
@@ -65,7 +66,7 @@ class _AuthState extends State<Auth> {
       obscureText: _obscure,
       onSaved: (String value) {
         setState(() {
-          passValue = value;
+          password = value;
         });
       },
     );
@@ -85,12 +86,12 @@ class _AuthState extends State<Auth> {
       );
   }
 
-  void _buildSubmitForm(Function Login){
+  void _buildSubmitForm(Function login){
     if (!_formKey.currentState.validate()){
       return;
     }
     _formKey.currentState.save();
-    Login(_formData['emailValue'],_formData['passwordValue']);
+    login(_formData['email'],_formData['password']);
 
     Navigator.pushNamed(context, '/admin');
   }

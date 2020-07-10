@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttercoursee/scoped_models/products.dart';
 import '../../pages/product.dart';
 import './price_tag.dart';
 import 'price_tag.dart';

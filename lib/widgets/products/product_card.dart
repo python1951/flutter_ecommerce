@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:fluttercoursee/scoped_models/products.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:fluttercoursee/widgets/products/address_tag.dart';
 import 'package:fluttercoursee/widgets/ui_elements/title_default.dart';
-import 'package:scoped_model/scoped_model.dart';
+
 import 'price_tag.dart';
+
 import 'address_tag.dart';
 import '../../scoped_models/main.dart';
+
 import  '../ui_elements/title_default.dart';
 import '../../pages/product.dart';
-import 'products.dart';
+
+
 import '../../models/product.dart';
 class ProductCard extends StatelessWidget{
   final Product product;
@@ -22,7 +25,8 @@ class ProductCard extends StatelessWidget{
         children: <Widget>[
           TitleDefault(product.title),
           SizedBox(width: 9,),
-          PriceTag(product.price.toString())
+          PriceTag(product.price.toString()),
+
 
         ],
       ),
@@ -45,7 +49,7 @@ class ProductCard extends StatelessWidget{
 
         ScopedModelDescendant<MainModel>(builder: (BuildContext context,Widget child,MainModel model){
           return IconButton(
-            icon: Icon(model.allProduct[productIndex].isFavourite?Icons.favorite:Icons.favorite_border,color: Colors.red[500],),
+            icon: Icon(model.allProducts[productIndex].isFavourite?Icons.favorite:Icons.favorite_border,color: Colors.red[500],),
             onPressed: (){
               model.selectProduct(productIndex);
               model.toggleFavouriteIcon();
@@ -68,7 +72,7 @@ class ProductCard extends StatelessWidget{
           _buildTitlePrice(),
           AddressTag("Round Square,Berlin,Germany"),
           SizedBox(height: 10,),
-         Text("product.userEmail"),
+          Text(product.email),
          _buildButtonBar(context),
         ],
       ),
